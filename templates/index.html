@@ -45,15 +45,12 @@
 
 <div id="carouselExampleControls" class="carousel slide bg-primary" data-bs-ride="carousel">
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="{% static 'img/pict.png' %}" class="mx-auto d-block w-33" alt="...">
+    {% for adv in advertisements %}
+    <div class= {% if forloop.counter == 1 %} 'carousel-item active' {% else %} 'carousel-item' {% endif %}">
+      <img src={% if adv.image %} {{ adv.image.url }} {% else %} {% static 'img/pict.png' %} {% endif %} class="mx-auto d-block w-33" style='max-height: 384px; min-height: 384px' alt='...'>
     </div>
-    <div class="carousel-item">
-      <img src="{% static 'img/pict.png' %}" class="mx-auto d-block w-33" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="{% static 'img/pict.png' %}" class="mx-auto d-block w-33" alt="...">
-    </div>
+   {% endfor %}
+   
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -100,7 +97,7 @@
       <div class="row g-0">
         <div class="col-md-4">
           <a href="advertisement.html" class="nav-link">
-            <img src="{% if adv.image %} {{ adv.image.url }} {% else %} {% static 'img/pict.png' %} {% endif %}" class="img-fluid rounded-start" alt="Card title">
+            <img src={% if adv.image %} {{ adv.image.url }} {% else %} {% static 'img/pict.png' %} {% endif %} class="img-fluid rounded-start" alt="Card title">
           </a>
         </div>
         <div class="col-md-8">
