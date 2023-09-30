@@ -47,7 +47,7 @@
   <div class="carousel-inner">
     {% for adv in advertisements %}
     <div class= {% if forloop.counter == 1 %} 'carousel-item active' {% else %} 'carousel-item' {% endif %}">
-      <img src={% if adv.image %} {{ adv.image.url }} {% else %} {% static 'img/pict.png' %} {% endif %} class="mx-auto d-block w-33" style='max-height: 384px; min-height: 384px' alt='...'>
+      <img src={% if adv.image != '/static/img/pict.png' %} {{ adv.image.url }} {% else %} {{ adv.image }} {% endif %} class="mx-auto d-block w-33" style='max-height: 384px; min-height: 384px' alt='...'>
     </div>
    {% endfor %}
    
@@ -97,7 +97,7 @@
       <div class="row g-0">
         <div class="col-md-4">
           <a href="advertisement.html" class="nav-link">
-            <img src={% if adv.image %} {{ adv.image.url }} {% else %} {% static 'img/pict.png' %} {% endif %} class="img-fluid rounded-start" alt="Card title">
+            <img src={% if adv.image != '/static/img/pict.png' %} {{ adv.image.url }} {% else %} {{ adv.image }} {% endif %} class="img-fluid rounded-start" alt="Card title">
           </a>
         </div>
         <div class="col-md-8">
