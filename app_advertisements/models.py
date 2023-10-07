@@ -40,7 +40,8 @@ class Advertisement(models.Model):
 
     @admin.display(description='Картинка, прикрепленная к объявлению')
     def show_image(self):
-        image = self.image.url if self.image else '/static/img/pict.png'
+        image = self.image.url if self.image != '/static/img/pict.png'  else self.image
+        # self.image.url if self.image else '/static/img/pict.png'
         return format_html('<img src="{}" style="max-height: 125px">', image)
 
     class Meta:

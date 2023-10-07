@@ -22,8 +22,18 @@
     </a>
   </li>
   <li class="nav-item">
+    <a class="nav-link" href="{% url 'profile' %}">
+      <span style="font-weight: bold;">Профиль</span>
+    </a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link" href="{% url 'register' %}">
       <span style="font-weight: bold;">Регистрация</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'game' %}">
+      <span style="font-weight: bold;">Игра</span>
     </a>
   </li>
   <li class="nav-item">
@@ -46,7 +56,7 @@
 <div id="carouselExampleControls" class="carousel slide bg-primary" data-bs-ride="carousel">
   <div class="carousel-inner">
     {% for adv in advertisements %}
-    <div class= {% if forloop.counter == 1 %} 'carousel-item active' {% else %} 'carousel-item' {% endif %}">
+    <div class={% if forloop.counter == 1 %} 'carousel-item active' {% else %} 'carousel-item' {% endif %}">
       <img src={% if adv.image != '/static/img/pict.png' %} {{ adv.image.url }} {% else %} {{ adv.image }} {% endif %} class="mx-auto d-block w-33" style='max-height: 384px; min-height: 384px' alt='...'>
     </div>
    {% endfor %}
@@ -110,6 +120,7 @@
               <span>Автор: {{ adv.user }}</span>
               <p class="card-text"><small class="text-muted">Размещено: {{ adv.created_date }}</small></p>
               <span>Цена: {{ adv.price }} руб.</span>
+              <div>Возможность торга: {% if adv.auction == 1 %} есть {% else %} нет {% endif %}</div>
             </a>
           </div>
         </div>

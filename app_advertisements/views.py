@@ -1,26 +1,37 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Advertisement
 from django.http import HttpResponse, HttpResponseRedirect
+from .forms import AdvertisementForms
+from django.urls import reverse
 
 def index(request):
     advs = Advertisement.objects.all()
     context = {'advertisements': advs}
-    return render(request, 'index.html', context)
+    return render(request, 'app_advertisements/index.html', context)
 
 def advertisement(request):
-    return render(request, 'advertisement.html')
+    return render(request, 'app_advertisements/advertisement.html')
 
 def advertisement_post(request):
-    return render(request, 'advertisement-post.html')
-
-def login(request):
-    return render(request, 'login.html')
-
-def profile(request):
-    return render(request, 'profile.html')
-
-def register(request):
-    return render(request, 'register.html')
+    if request.method == 'POST':
+        form = AdvertisementForms(request.POST, request.FILES)
+        form.fields['image'].initial = '/static/img/pict.png'
+        if form.is_valid():
+            # advertisement = Advertisement(**form.cleaned_data)
+            advertisement = form.save(commit=False)
+            advertisement.user = request.user
+            advertisement.save()
+            url = reverse('main_page')
+            return redirect(url)
+    else:
+        form = AdvertisementForms()
+    form = AdvertisementForms()
+    context = {'form': form}
+    return render(request, 'app_advertisements/advertisement-post.html', context)
 
 def top_sellers(request):
-    return render(request, 'top-sellers.html')
+    return render(request, 'app_advertisements/top-sellers.html')
+
+def game(request):
+    return render(request, 'game.html')
+

@@ -49,8 +49,14 @@ Advertisement-post
       </div>
     </div>
   </div>
+
   <div class="container">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="col-6">
+        {{ form.as_p }}
+      </div>
+      <!--
       <div class="row mb-3">
         <div class="col">
           <label class="col-sm-4 col-form-label offset-4">Title</label>
@@ -92,6 +98,7 @@ Advertisement-post
           </div>
         </div>
       </div>
+      -->
       <div class="row mb-3 offset-sm-5">
         <div class="col">
           <button type="submit" class="btn btn-success">Принять</button>
