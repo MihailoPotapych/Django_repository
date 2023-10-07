@@ -14,9 +14,11 @@ def advertisement(request):
 
 def advertisement_post(request):
     if request.method == 'POST':
+        print('post-request')
         form = AdvertisementForms(request.POST, request.FILES)
         form.fields['image'].initial = '/static/img/pict.png'
         if form.is_valid():
+            print('valid')
             # advertisement = Advertisement(**form.cleaned_data)
             advertisement = form.save(commit=False)
             advertisement.user = request.user
@@ -24,6 +26,7 @@ def advertisement_post(request):
             url = reverse('main_page')
             return redirect(url)
     else:
+        print('unvalid')
         form = AdvertisementForms()
     form = AdvertisementForms()
     context = {'form': form}
