@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Advertisement
 from django.http import HttpResponse, HttpResponseRedirect
-from .forms import AdvertisementForms
+from .forms import AdvertisementForm
 from django.urls import reverse
 
 def index(request):
@@ -15,7 +15,7 @@ def advertisement(request):
 def advertisement_post(request):
     if request.method == 'POST':
         print('post-request')
-        form = AdvertisementForms(request.POST, request.FILES)
+        form = AdvertisementForm(request.POST, request.FILES)
         form.fields['image'].initial = '/static/img/pict.png'
         if form.is_valid():
             print('valid')
@@ -26,9 +26,8 @@ def advertisement_post(request):
             url = reverse('main_page')
             return redirect(url)
     else:
-        print('unvalid')
-        form = AdvertisementForms()
-    form = AdvertisementForms()
+        form = AdvertisementForm()
+    form = AdvertisementForm()
     context = {'form': form}
     return render(request, 'app_advertisements/advertisement-post.html', context)
 
