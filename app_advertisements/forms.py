@@ -23,6 +23,7 @@ class AdvertisementForm(forms.ModelForm):
         title = self.cleaned_data['title']
         if title[0] == '?':
             raise ValidationError('Заголовок не может начинаться с "?"')
+        return title
     # title = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
     # description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control form-control-lg'}))
     # price = forms.DecimalField(widget=forms.NumberInput(attrs={'class': 'form-control form-control-lg'}))
